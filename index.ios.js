@@ -12,6 +12,29 @@ import {
   View
 } from 'react-native';
 
+
+class Blink extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {showText: true};
+
+    // Toggle the state every second
+    setInterval(() => {
+      this.setState(previousState => {
+        return { showText: !previousState.showText };
+      });
+    }, 1000);
+  }
+
+  render() {
+    let display = this.state.showText ? this.props.text : ' ';
+    return (
+      <Text>{display}</Text>
+    );
+  }
+}
+
+
 export default class reactFirst extends Component {
   render() {
     return (
@@ -19,14 +42,21 @@ export default class reactFirst extends Component {
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
+
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
+        <Text style={styles.welcomeText}>
+        Welcome
+        </Text>
+        <Text style={styles.welcomeText}>
+        <Blink text ='Blink text' />
+        </Text>
+        <View style={{width:120,height:120,backgroundColor:'steelblue'}}/>
       </View>
+      
+
     );
   }
 }
@@ -48,6 +78,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  welcomeText:{
+    fontSize:22,
+    textAlign:'center',
+    color:'red',
   },
 });
 
